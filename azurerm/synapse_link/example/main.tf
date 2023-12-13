@@ -1,19 +1,19 @@
 provider "azurerm" {
   features {}
 }
-
+// =========================
+// General
+// =========================
 resource "random_string" "name" {
   length  = 10
   lower   = true
   upper   = false
   special = false
 }
-
 resource "azurerm_resource_group" "resource_group" {
   name     = "rg-${random_string.name.result}"
   location = "West Europe"
 }
-
 resource "azurerm_storage_account" "storage_account" {
   name                     = "st${random_string.name.result}"
   resource_group_name      = azurerm_resource_group.resource_group.name
@@ -23,30 +23,25 @@ resource "azurerm_storage_account" "storage_account" {
   account_kind             = "StorageV2"
   is_hns_enabled           = "true"
 }
-
 resource "azurerm_role_assignment" "storage_account_contributor" {
   scope                = azurerm_storage_account.storage_account.id
   role_definition_name = "Storage Account Contributor"
   principal_id         = data.azurerm_client_config.example.object_id
 }
-
 resource "azurerm_role_assignment" "storage_account_blob_contributor" {
   scope                = azurerm_storage_account.storage_account.id
   role_definition_name = "Storage Blob Data Contributor"
   principal_id         = data.azurerm_client_config.example.object_id
 }
-
 resource "azurerm_storage_container" "azurerm_storage_container" {
   name                  = "cont${random_string.name.result}"
   storage_account_name  = azurerm_storage_account.storage_account.name
   container_access_type = "container"
 }
-
 resource "azurerm_storage_data_lake_gen2_filesystem" "data_lake_gen2_filesystem" {
   name               = "dlfs${random_string.name.result}"
   storage_account_id = azurerm_storage_account.storage_account.id
 }
-
 resource "azurerm_cosmosdb_account" "cosmosdb_account" {
   name                = "cosmos-${random_string.name.result}"
   resource_group_name = azurerm_resource_group.resource_group.name
@@ -65,13 +60,11 @@ resource "azurerm_cosmosdb_account" "cosmosdb_account" {
     schema_type = "FullFidelity"
   }
 }
-
 resource "azurerm_cosmosdb_sql_database" "cosmosdb_sql_database" {
   name                = "sql-${random_string.name.result}"
   resource_group_name = azurerm_cosmosdb_account.cosmosdb_account.resource_group_name
   account_name        = azurerm_cosmosdb_account.cosmosdb_account.name
 }
-
 resource "azurerm_cosmosdb_sql_container" "cosmosdb_sql_container" {
   name                  = "sqlcont-${random_string.name.result}"
   resource_group_name   = azurerm_cosmosdb_account.cosmosdb_account.resource_group_name
@@ -96,7 +89,6 @@ resource "azurerm_cosmosdb_sql_container" "cosmosdb_sql_container" {
     paths = ["/definition/idlong", "/definition/idshort"]
   }
 }
-
 resource "azurerm_synapse_workspace" "synapse_workspace" {
   name                                 = "synapse-${random_string.name.result}"
   resource_group_name                  = azurerm_resource_group.resource_group.name
@@ -113,8 +105,6 @@ resource "azurerm_synapse_workspace" "synapse_workspace" {
     type = "SystemAssigned"
   }
 }
-
-## StatusCode=403 -- Original Error: autorest/azure: Service returned an error. Status=403 Code="ClientIpAddressNotAuthorized" Message="Client Ip address : 172.190.182.148"
 resource "azurerm_synapse_firewall_rule" "synapse_firewall_rule" {
   name                 = "allowAll"
   synapse_workspace_id = azurerm_synapse_workspace.synapse_workspace.id
@@ -122,7 +112,9 @@ resource "azurerm_synapse_firewall_rule" "synapse_firewall_rule" {
   end_ip_address       = "255.255.255.255"
 }
 
-# to be deleted: Future#WaitForCompletion: the number of retries has been exceeded: StatusCode=403 -- Original Error: Code="ClientIpAddressNotAuthorized" Message="Client Ip address : 172.190.182.148"
+// =========================
+// Synapse Linked Service to CosmosDB Database
+// =========================
 module "synapse_linked_service" {
   source                   = "../"
   name                     = "synapse-linked-service-${random_string.name.result}"
