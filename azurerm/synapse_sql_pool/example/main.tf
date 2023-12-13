@@ -68,40 +68,40 @@ resource "azurerm_synapse_firewall_rule" "synapse_firewall_rule" {
 // Synapse SQL Pool
 // =========================
 module "synapse_sql_pool" {
-  source               = "../"
+  source = "../"
   // Synapse SQL Pool Variables
-  name                 = "synapse_sql_pool_${random_string.name.result}"
-  synapse_workspace_id = azurerm_synapse_workspace.synapse_workspace.id
-  sku_name             = "DW100c"
-  create_mode          = "Default"
-  storage_account_type = "GRS"
-  collation            = "SQL_Latin1_General_CP1_CI_AS"
-  data_encrypted       = true
+  name                      = "synapse_sql_pool_${random_string.name.result}"
+  synapse_workspace_id      = azurerm_synapse_workspace.synapse_workspace.id
+  sku_name                  = "DW100c"
+  create_mode               = "Default"
+  storage_account_type      = "GRS"
+  collation                 = "SQL_Latin1_General_CP1_CI_AS"
+  data_encrypted            = true
   geo_backup_policy_enabled = false
-  tags = local.tags
+  tags                      = local.tags
   // Extended Auditing Policy Variables
-  audit_logs_enabled = true
-  audit_logs_primary_blob_endpoint = azurerm_storage_account.storage_account.primary_blob_endpoint
-  audit_logs_storage_account_access_key = azurerm_storage_account.storage_account.primary_access_key
+  audit_logs_enabled                                 = true
+  audit_logs_primary_blob_endpoint                   = azurerm_storage_account.storage_account.primary_blob_endpoint
+  audit_logs_storage_account_access_key              = azurerm_storage_account.storage_account.primary_access_key
   audit_logs_storage_account_access_key_is_secondary = false
-  audit_logs_log_monitoring_enabled = true
-  audit_logs_retention_in_days = 2
+  audit_logs_log_monitoring_enabled                  = true
+  audit_logs_retention_in_days                       = 2
   // Security Alert Policy Variables
-  security_alert_policy_enabled = true
-  security_alert_policy_state = "New"
-  security_alert_policy_disabled_alerts = ["Sql_Injection", "Sql_Injection_Vulnerability"]
-  security_alert_policy_storage_endpoint = azurerm_storage_account.storage_account.primary_blob_endpoint
-  security_alert_policy_storage_account_access_key = azurerm_storage_account.storage_account.primary_access_key
+  security_alert_policy_enabled                      = true
+  security_alert_policy_state                        = "New"
+  security_alert_policy_disabled_alerts              = ["Sql_Injection", "Sql_Injection_Vulnerability"]
+  security_alert_policy_storage_endpoint             = azurerm_storage_account.storage_account.primary_blob_endpoint
+  security_alert_policy_storage_account_access_key   = azurerm_storage_account.storage_account.primary_access_key
   security_alert_policy_email_account_admins_enabled = true
-  security_alert_policy_email_addresses = ["sample@sample.com"]
-  security_alert_policy_retention_days = 2
+  security_alert_policy_email_addresses              = ["sample@sample.com"]
+  security_alert_policy_retention_days               = 2
   // Vulnerability Assessment Variables
-  vulnerability_assessment_enabled = true
-  vulnerability_assessment_storage_container_path = azurerm_storage_container.azurerm_storage_container.name
+  vulnerability_assessment_enabled                    = true
+  vulnerability_assessment_storage_container_path     = azurerm_storage_container.azurerm_storage_container.name
   vulnerability_assessment_storage_account_access_key = azurerm_storage_account.storage_account.primary_access_key
   vulnerability_assessment_recurring_scans = {
-    enabled = true
+    enabled                           = true
     email_subscription_admins_enabled = true
-    emails = ["sample@sample.com"]
+    emails                            = ["sample@sample.com"]
   }
 }

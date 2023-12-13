@@ -164,8 +164,8 @@ variable "security_alert_policy_storage_account_access_key" {
 // ====================================
 variable "vulnerability_assessment_enabled" {
   description = "(Optional) Specifies whether the vulnerability assessment is enabled or not. Defaults to false."
-  type    = bool
-  default = false
+  type        = bool
+  default     = false
 }
 variable "vulnerability_assessment_storage_container_path" {
   description = "(Required) A blob storage container path to hold the scan results (e.g. https://example.blob.core.windows.net/VaScans/)."
@@ -189,10 +189,10 @@ variable "vulnerability_assessment_recurring_scans" {
   - email_subscription_admins_enabled: (Optional) Boolean flag which specifies if the schedule scan notification will be sent to the subscription administrators. Defaults to false.
   - emails: (Optional) Specifies an array of email addresses to which the scan notification is sent.
   EOF
-  type        = object({
+  type = object({
     enabled                           = optional(bool)
     email_subscription_admins_enabled = optional(bool)
     emails                            = optional(list(string))
   })
-  default     = null
+  default = null
 }

@@ -116,13 +116,21 @@ resource "azurerm_synapse_firewall_rule" "synapse_firewall_rule" {
 // Synapse Linked Service to CosmosDB Database
 // =========================
 module "synapse_linked_service" {
-  source                   = "../"
-  name                     = "synapse-linked-service-${random_string.name.result}"
-  integration_runtime_name = "synapse-linked-service-${random_string.name.result}"
-  location                 = azurerm_resource_group.resource_group.location
-  synapse_workspace_id     = azurerm_synapse_workspace.synapse_workspace.id
-  type                     = "CosmosDb"
-  type_properties_json     = <<JSON
+  source = "../"
+  // General
+  synapse_workspace_id = azurerm_synapse_workspace.synapse_workspace.id
+  // Integration Runtime Variables
+  integration_runtime_name        = "synapse-linked-service-${random_string.name.result}"
+  integration_runtime_description = "synapse-linked-service-${random_string.name.result}-description"
+  location                        = azurerm_resource_group.resource_group.location
+  compute_type                    = "General"
+  core_count                      = 8
+  time_to_live_min                = 1
+  // Linked Service Variables
+  name                 = "synapse-linked-service-${random_string.name.result}"
+  description          = "synapse-linked-service-${random_string.name.result}-description"
+  type                 = "CosmosDb"
+  type_properties_json = <<JSON
 {
   "connectionString": "${azurerm_cosmosdb_account.cosmosdb_account.connection_strings[0]}Database=${azurerm_cosmosdb_sql_database.cosmosdb_sql_database.name};"
 }

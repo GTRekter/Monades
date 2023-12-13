@@ -29,15 +29,15 @@ resource "azurerm_synapse_sql_pool_extended_auditing_policy" "synapse_sql_pool_e
 }
 
 resource "azurerm_synapse_sql_pool_security_alert_policy" "synapse_sql_pool_security_alert_policy" {
-  count                      = var.security_alert_policy_enabled ? 1 : 0
-  sql_pool_id                = azurerm_synapse_sql_pool.synapse_sql_pool.id
-  policy_state               = var.security_alert_policy_state
-  storage_endpoint           = var.security_alert_policy_storage_endpoint
-  storage_account_access_key = var.security_alert_policy_storage_account_access_key
-  disabled_alerts            = var.security_alert_policy_disabled_alerts
+  count                        = var.security_alert_policy_enabled ? 1 : 0
+  sql_pool_id                  = azurerm_synapse_sql_pool.synapse_sql_pool.id
+  policy_state                 = var.security_alert_policy_state
+  storage_endpoint             = var.security_alert_policy_storage_endpoint
+  storage_account_access_key   = var.security_alert_policy_storage_account_access_key
+  disabled_alerts              = var.security_alert_policy_disabled_alerts
   email_account_admins_enabled = var.security_alert_policy_email_account_admins_enabled
-  email_addresses               = var.security_alert_policy_email_addresses
-  retention_days             = var.security_alert_policy_retention_days
+  email_addresses              = var.security_alert_policy_email_addresses
+  retention_days               = var.security_alert_policy_retention_days
 }
 
 resource "azurerm_synapse_sql_pool_vulnerability_assessment" "synapse_sql_pool_vulnerability_assessment" {
@@ -45,7 +45,7 @@ resource "azurerm_synapse_sql_pool_vulnerability_assessment" "synapse_sql_pool_v
   sql_pool_security_alert_policy_id = azurerm_synapse_sql_pool_security_alert_policy.synapse_sql_pool_security_alert_policy.id
   storage_container_path            = var.vulnerability_assessment_storage_container_path
   storage_account_access_key        = var.vulnerability_assessment_storage_account_access_key
-  storage_container_sas_key = var.vulnerability_assessment_storage_container_sas_key
+  storage_container_sas_key         = var.vulnerability_assessment_storage_container_sas_key
   dynamic "recurring_scans" {
     for_each = var.vulnerability_assessment_recurring_scans != null ? [var.vulnerability_assessment_recurring_scans] : []
     content {
