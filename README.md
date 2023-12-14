@@ -3,12 +3,12 @@
 Welcome to the Monades repository, a comprehensive library of reusable Terraform modules. This repository is designed to streamline infrastructure deployments by providing a range of modules for various use cases.
 
 ## Module Overview
-- auth0: Module for Auth0 configurations.
-- azurerm: Azure Resource Manager modules, including:
-  - keyvault_key: For Azure Key Vault key management.
-  - synapse_link: Modules for Azure Synapse Link.
-  - synapse_sql_pool: For managing Azure Synapse SQL Pools.
-  - synapse_workspace: Azure Synapse Workspace configurations.
+- **auth0**: Module for Auth0 configurations.
+- **azurerm**: Azure Resource Manager modules, including:
+  - **keyvault_key**: For Azure Key Vault key management.
+  - **synapse_link**: Modules for Azure Synapse Link.
+  - **synapse_sql_pool**: For managing Azure Synapse SQL Pools.
+  - **synapse_workspace**: Azure Synapse Workspace configurations.
 
 ## Getting Started
 Clone the repository and follow the individual module's README for setup instructions.
