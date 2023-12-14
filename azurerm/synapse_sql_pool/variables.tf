@@ -129,8 +129,8 @@ variable "security_alert_policy_disabled_alerts" {
   type        = list(string)
   default     = ["Sql_Injection", "Sql_Injection_Vulnerability", "Access_Anomaly", "Data_Exfiltration", "Unsafe_Action"]
   validation {
-    condition     = can(regex("^(Sql_Injection|Sql_Injection_Vulnerability|Access_Anomaly|Data_Exfiltration|Unsafe_Action)$", var.security_alert_policy_disabled_alerts))
-    error_message = "Invalid Security Alert Policy Disabled Alerts. Possible values are Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action"
+    condition     = alltrue([for alert in var.security_alert_policy_disabled_alerts: can(regex("^(Sql_Injection|Sql_Injection_Vulnerability|Access_Anomaly|Data_Exfiltration|Unsafe_Action)$", alert))])
+    error_message = "Invalid Security Alert Policy Disabled Alerts. Possible values are Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action."
   }
 }
 variable "security_alert_policy_storage_endpoint" {

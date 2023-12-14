@@ -40,6 +40,6 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_id"></a> [id](#output\_id) | The ID of the Synapse Linked Service |
-| <a name="output_runtime_id"></a> [runtime\_id](#output\_runtime\_id) | The ID of the Synapse Azure Integration Runtime. |
+| <a name="output_integration_runtime_id"></a> [integration\_runtime\_id](#output\_integration\_runtime\_id) | The ID of the Synapse Azure Integration Runtime. |
+| <a name="output_linked_service_id"></a> [linked\_service\_id](#output\_linked\_service\_id) | The ID of the Synapse Linked Service |
 <!-- END_TF_DOCS -->

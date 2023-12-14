@@ -61,7 +61,8 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_synapse_sql_pool_extended_auditing_policy_id"></a> [synapse\_sql\_pool\_extended\_auditing\_policy\_id](#output\_synapse\_sql\_pool\_extended\_auditing\_policy\_id) | The ID of the Synapse SQL Pool Extended Auditing Policy. |
-| <a name="output_synapse_sql_pool_id"></a> [synapse\_sql\_pool\_id](#output\_synapse\_sql\_pool\_id) | The ID of the Synapse SQL Pool Security Alert Policy. |
-| <a name="output_synapse_sql_pool_vulnerability_assessment_id"></a> [synapse\_sql\_pool\_vulnerability\_assessment\_id](#output\_synapse\_sql\_pool\_vulnerability\_assessment\_id) | The ID of the Synapse SQL Pool Vulnerability Assessment. |
+| <a name="output_extended_auditing_policy_id"></a> [extended\_auditing\_policy\_id](#output\_extended\_auditing\_policy\_id) | The ID of the Synapse SQL Pool Extended Auditing Policy. |
+| <a name="output_security_alert_policy_id"></a> [security\_alert\_policy\_id](#output\_security\_alert\_policy\_id) | The ID of the Synapse SQL Pool Security Alert Policy. |
+| <a name="output_sql_pool_id"></a> [sql\_pool\_id](#output\_sql\_pool\_id) | The ID of the Synapse SQL Pool. |
+| <a name="output_vulnerability_assessment_id"></a> [vulnerability\_assessment\_id](#output\_vulnerability\_assessment\_id) | The ID of the Synapse SQL Pool Vulnerability Assessment. |
 <!-- END_TF_DOCS -->

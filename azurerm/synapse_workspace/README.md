@@ -71,5 +71,9 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_id"></a> [id](#output\_id) | The ID of the synapse Workspace. |
+| <a name="output_extended_auditing_policy_id"></a> [extended\_auditing\_policy\_id](#output\_extended\_auditing\_policy\_id) | The ID of the Synapse Workspace Extended Auditing Policy. |
+| <a name="output_firewall_rules_ids"></a> [firewall\_rules\_ids](#output\_firewall\_rules\_ids) | The IDs of the synapse Firewall Rules. |
+| <a name="output_security_alert_policy_id"></a> [security\_alert\_policy\_id](#output\_security\_alert\_policy\_id) | The ID of the Synapse Workspace Security Alert Policy. |
+| <a name="output_vulnerability_assessment_id"></a> [vulnerability\_assessment\_id](#output\_vulnerability\_assessment\_id) | The ID of the Synapse Workspace Vulnerability Assessment. |
+| <a name="output_workspace_id"></a> [workspace\_id](#output\_workspace\_id) | The ID of the synapse Workspace. |
 <!-- END_TF_DOCS -->

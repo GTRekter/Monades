@@ -42,7 +42,7 @@ resource "azurerm_synapse_sql_pool_security_alert_policy" "synapse_sql_pool_secu
 
 resource "azurerm_synapse_sql_pool_vulnerability_assessment" "synapse_sql_pool_vulnerability_assessment" {
   count                             = var.vulnerability_assessment_enabled && var.security_alert_policy_enabled ? 1 : 0
-  sql_pool_security_alert_policy_id = azurerm_synapse_sql_pool_security_alert_policy.synapse_sql_pool_security_alert_policy.id
+  sql_pool_security_alert_policy_id = azurerm_synapse_sql_pool_security_alert_policy.synapse_sql_pool_security_alert_policy[0].id
   storage_container_path            = var.vulnerability_assessment_storage_container_path
   storage_account_access_key        = var.vulnerability_assessment_storage_account_access_key
   storage_container_sas_key         = var.vulnerability_assessment_storage_container_sas_key
