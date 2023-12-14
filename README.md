@@ -14,7 +14,11 @@ Welcome to the Monades repository, a comprehensive library of reusable Terraform
 Clone the repository and follow the individual module's README for setup instructions.
 
 ## Usage
-Each module contains a README.md with specific usage instructions. Refer to these for detailed guidance on deploying each module.
+Each module contains a README.md with specific usage instructions. Refer to these for detailed guidance on deploying each module. To regenerate the documentation after updating Terraform files, run the following command in the root of the repository:
+```
+terraform-docs markdown table . --output-file README.md
+```
+This command will update the README.md file with the latest inputs, outputs, and module descriptions as defined in your Terraform configuration files.
 
 ##  Contributing
 We warmly welcome contributions to the Monades repository! If you're looking to contribute, here are some guidelines to get started:
