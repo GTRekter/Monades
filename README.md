@@ -7,8 +7,8 @@ Welcome to the Monades repository, a comprehensive library of reusable Terraform
 - **azurerm**: Azure Resource Manager modules, including:
   - **keyvault_key**: For Azure Key Vault key management.
   - **synapse_link**: Modules for Azure Synapse Link.
-  - **synapse_sql_pool**: For managing Azure Synapse SQL Pools.
-  - **synapse_workspace**: Azure Synapse Workspace configurations.
+  - **synapse_sql_pool**: The synapse_sql_pool module in the "Monades" repository is designed for comprehensive management of Azure Synapse SQL Pools. It includes configuring the main SQL pool with various options such as SKU name and storage type, implementing extended auditing policies with detailed logging, setting up security alert policies with alert management and email notifications, and enabling vulnerability assessments which include recurring scans and storage configurations. This module provides a robust and flexible approach to managing Azure Synapse SQL Pools with an emphasis on security and customization.
+  - **synapse_workspace**: The synapse_workspace module in the "Monades" repository is designed to manage Azure Synapse Workspace resources effectively. It includes the primary Synapse Workspace setup, Azure AD and SQL AD admin configurations, firewall rules, and comprehensive security and auditing policies. The module sets up the workspace with Azure Data Lake Gen2 filesystem integration, configures administrators for both Azure AD and SQL, and establishes security measures such as firewall rules, extended auditing policies, security alert policies, and vulnerability assessments. This suite of resources ensures a secure, well-managed, and fully functional Synapse Workspace environment.
 
 ## Getting Started
 Clone the repository and follow the individual module's README for setup instructions.
