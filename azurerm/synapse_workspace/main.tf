@@ -3,10 +3,9 @@ resource "azurerm_synapse_workspace" "synapse_workspace" {
   resource_group_name                  = var.resource_group_name
   location                             = var.location
   storage_data_lake_gen2_filesystem_id = var.storage_data_lake_gen2_filesystem_id
-
-  sql_administrator_login          = var.sql_administrator_login
-  sql_administrator_login_password = var.sql_administrator_login_password
-  azuread_authentication_only      = var.azuread_authentication_only
+  sql_administrator_login              = var.sql_administrator_login
+  sql_administrator_login_password     = var.sql_administrator_login_password
+  azuread_authentication_only          = var.azuread_authentication_only
   dynamic "customer_managed_key" {
     for_each = var.customer_managed_key != null ? [var.customer_managed_key] : []
     content {
@@ -14,7 +13,6 @@ resource "azurerm_synapse_workspace" "synapse_workspace" {
       key_name           = customer_managed_key.value.key_name
     }
   }
-
   data_exfiltration_protection_enabled = var.data_exfiltration_protection_enabled
   dynamic "azure_devops_repo" {
     for_each = var.azure_devops_repo != null ? [var.azure_devops_repo] : []
@@ -28,14 +26,12 @@ resource "azurerm_synapse_workspace" "synapse_workspace" {
       last_commit_id  = try(azure_devops_repo.value.last_commit_id, null)
     }
   }
-
   public_network_access_enabled   = var.public_network_access_enabled
   managed_virtual_network_enabled = var.managed_virtual_network_enabled
   compute_subnet_id               = var.compute_subnet_id
-
-  purview_id                   = var.purview_id
-  sql_identity_control_enabled = var.sql_identity_control_enabled
-  tags                         = var.tags
+  purview_id                      = var.purview_id
+  sql_identity_control_enabled    = var.sql_identity_control_enabled
+  tags                            = var.tags
   identity {
     type = "SystemAssigned"
   }
@@ -75,8 +71,8 @@ resource "azurerm_synapse_workspace_extended_auditing_policy" "synapse_workspace
   synapse_workspace_id                    = azurerm_synapse_workspace.synapse_workspace.id
   storage_endpoint                        = var.auditing_policy_storage_endpoint
   storage_account_access_key              = var.auditing_policy_storage_account_access_key
-  storage_account_access_key_is_secondary = false
-  retention_in_days                       = 6
+  storage_account_access_key_is_secondary = var.auditing_policy_storage_account_access_key_is_secondary
+  retention_in_days                       = var.auditing_policy_retention_in_days
 }
 
 resource "azurerm_synapse_workspace_security_alert_policy" "synapse_workspace_security_alert_policy" {
@@ -104,4 +100,13 @@ resource "azurerm_synapse_workspace_vulnerability_assessment" "synapse_workspace
       emails                            = recurring_scans.value.emails
     }
   }
+}
+
+resource "azurerm_synapse_managed_private_endpoint" "synapse_managed_private_endpoint" {
+  count = var.synapse_managed_private_endpoint != null ? 1 : 0
+
+  name                 = var.synapse_managed_private_endpoint.name
+  synapse_workspace_id = azurerm_synapse_workspace.synapse_workspace.id
+  target_resource_id   = var.synapse_managed_private_endpoint.target_resource_id
+  subresource_name     = var.synapse_managed_private_endpoint.subresource_name
 }

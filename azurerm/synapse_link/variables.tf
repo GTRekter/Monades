@@ -44,7 +44,6 @@ variable "time_to_live_min" {
   type        = number
   default     = 0
 }
-
 // ====================================
 // Linked Service Variables
 // ====================================

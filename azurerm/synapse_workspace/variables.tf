@@ -17,7 +17,6 @@ variable "storage_data_lake_gen2_filesystem_id" {
   description = "(Required) Specifies the ID of storage data lake gen2 filesystem resource. The default data lake storage account url property should be in the format: https://accountname.dfs.core.windows.net. Changing this forces a new resource to be created."
   type        = string
 }
-
 // ====================================
 // Administrator Authentication Variables
 // ====================================
@@ -62,7 +61,6 @@ variable "azuread_authentication_only" {
   type        = bool
   default     = false
 }
-
 // ====================================
 // Network Rule Variables
 // ====================================
@@ -90,7 +88,6 @@ variable "firewall_rules" {
   }))
   default = []
 }
-
 // ====================================
 // Repository Variables
 // ====================================
@@ -112,7 +109,6 @@ variable "data_exfiltration_protection_enabled" {
   type        = bool
   default     = false
 }
-
 // ====================================
 // Additional Variables
 // ====================================
@@ -131,7 +127,6 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
-
 // ====================================
 // Auditing Variables
 // ====================================
@@ -165,7 +160,6 @@ variable "auditing_policy_log_monitoring_enabled" {
   type        = bool
   default     = false
 }
-
 // ====================================
 // Security Alert Variables
 // ====================================
@@ -217,7 +211,6 @@ variable "security_alert_policy_storage_endpoint" {
   type        = string
   default     = null
 }
-
 // ====================================
 // Vulnerability Assessment Variables
 // ====================================
@@ -242,6 +235,17 @@ variable "vulnerability_assessment_recurring_scans" {
     enabled                           = bool
     email_subscription_admins_enabled = bool
     emails                            = list(string)
+  })
+  default = null
+}
+// ====================================
+// Private Endpoint
+// ====================================
+variable "synapse_managed_private_endpoint" {
+  type = object({
+    name               = string
+    target_resource_id = string
+    subresource_name   = string
   })
   default = null
 }

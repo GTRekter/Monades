@@ -7,6 +7,7 @@ resource "azurerm_synapse_integration_runtime_azure" "integration_runtime_azure"
   description          = var.integration_runtime_description
   time_to_live_min     = var.time_to_live_min
 }
+
 resource "azurerm_synapse_linked_service" "linked_service" {
   name                 = var.name
   description          = var.description

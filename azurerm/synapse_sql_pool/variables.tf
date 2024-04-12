@@ -72,7 +72,6 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
-
 // ====================================
 // Extended Auditing Policy Variables
 // ====================================
@@ -106,7 +105,6 @@ variable "audit_logs_log_monitoring_enabled" {
   type        = bool
   default     = true
 }
-
 // ====================================
 // Security Alert Policy Variables
 // ====================================
@@ -129,7 +127,7 @@ variable "security_alert_policy_disabled_alerts" {
   type        = list(string)
   default     = ["Sql_Injection", "Sql_Injection_Vulnerability", "Access_Anomaly", "Data_Exfiltration", "Unsafe_Action"]
   validation {
-    condition     = alltrue([for alert in var.security_alert_policy_disabled_alerts: can(regex("^(Sql_Injection|Sql_Injection_Vulnerability|Access_Anomaly|Data_Exfiltration|Unsafe_Action)$", alert))])
+    condition     = alltrue([for alert in var.security_alert_policy_disabled_alerts : can(regex("^(Sql_Injection|Sql_Injection_Vulnerability|Access_Anomaly|Data_Exfiltration|Unsafe_Action)$", alert))])
     error_message = "Invalid Security Alert Policy Disabled Alerts. Possible values are Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action."
   }
 }
@@ -158,7 +156,6 @@ variable "security_alert_policy_storage_account_access_key" {
   type        = string
   default     = null
 }
-
 // ====================================
 // Vulnerability Assessment Variables
 // ====================================

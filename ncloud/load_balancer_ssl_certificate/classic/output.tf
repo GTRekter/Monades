@@ -1,0 +1,1 @@
+# This resource doesn't provide any outputs.
