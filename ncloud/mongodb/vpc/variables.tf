@@ -72,37 +72,37 @@ variable "cluster_type_code" {
 variable "image_product_code" {
   description = "(Optional) MongoDB image product code. If not entered, it is created as a default value. It can be obtained through data.ncloud_mongodb_image_products."
   type        = string
-  default = null
+  default     = null
 }
 
 variable "member_product_code" {
   description = "(Optional) Member server product code. It can be obtained through data.ncloud_mongodb_products. Default: select the minimum specifications and must be based on 1. Memory and 2. CPU"
   type        = string
-  default = null
+  default     = null
 }
 
 variable "arbiter_product_code" {
   description = "(Optional) Arbiter server product code. It can be obtained through data.ncloud_mongodb_products. Default: select the minimum specifications and must be based on 1. Memory and 2. CPU"
   type        = string
-  default = null
+  default     = null
 }
 
 variable "mongos_product_code" {
   description = "(Optional) Mongos server product code. It can be obtained through data.ncloud_mongodb_products. Default: select the minimum specifications and must be based on 1. Memory and 2. CPU"
   type        = string
-  default = null
+  default     = null
 }
 
 variable "config_product_code" {
   description = "(Optional) Config server product code. It can be obtained through data.ncloud_mongodb_products. Default: select the minimum specifications and must be based on 1. Memory and 2. CPU"
   type        = string
-  default = null
+  default     = null
 }
 
 variable "shard_count" {
   description = "(Optional, Changeable) The number of MongoDB Shards. The number of shards can be defined for sharding. Only 2 or 3 are allowed for the initial configuration. Only enter when cluster_type_code is SHARDED_CLUSTER. Default: 2, Min: 2, Max: 5"
   type        = number
-  default = null
+  default     = null
   validation {
     condition     = var.shard_count == null || (var.shard_count >= 2 && var.shard_count <= 5)
     error_message = "The shard_count must be between 2 and 5, or null if sharding is not used."
@@ -112,7 +112,7 @@ variable "shard_count" {
 variable "member_server_count" {
   description = "(Optional, Changeable) The number of MongoDB Member Servers. The number of member servers per replica set (or per shard if sharding) can be defined. Selectable between 3 to 7, including arbiter servers. Default : 3, Min: 2, Max: 7"
   type        = number
-  default = 3
+  default     = 3
   validation {
     condition     = var.member_server_count != null && var.member_server_count >= 2 && var.member_server_count <= 7
     error_message = "The member_server_count must be between 2 and 7."
@@ -122,7 +122,7 @@ variable "member_server_count" {
 variable "arbiter_server_count" {
   description = "(Optional, Changeable) The number of MongoDB Arbiter servers. You can select whether to use the Arbiter server per Replica Set (for each shard in the case of Sharding). Up to one Arbiter server can be selected. The Arbiter server is provided with a minimum configurable spec. Default: 0, Min: 0, Max: 1"
   type        = number
-  default = 0
+  default     = 0
   validation {
     condition     = var.arbiter_server_count >= 0 && var.arbiter_server_count <= 1
     error_message = "The arbiter_server_count must be between 0 and 1."
@@ -152,7 +152,7 @@ variable "config_server_count" {
 variable "backup_file_retention_period" {
   description = "(Optional) Backups are performed daily and backup files are stored in separate backup storage. Fees are charged based on the space used. Default: 1(1 day), Min: 1, Max: 30"
   type        = number
-  default = 1
+  default     = 1
   validation {
     condition     = var.backup_file_retention_period >= 1 && var.backup_file_retention_period <= 30
     error_message = "The backup_file_retention_period must be between 1 and 30."
@@ -182,7 +182,7 @@ variable "data_storage_type" {
 variable "member_port" {
   description = "(Optional) TCP port number for access to the MongoDB Member Server. Default: 17017, Min: 10000, Max: 65535"
   type        = number
-  default = 17017
+  default     = 17017
   validation {
     condition     = var.member_port >= 10000 && var.member_port <= 65535
     error_message = "The member_port must be between 10000 and 65535."

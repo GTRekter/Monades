@@ -16,13 +16,13 @@ variable "node_count" {
 variable "product_code" {
   description = "(Optional) Product code. Required for XEN/RHV cluster nodepool."
   type        = string
-  default = null
+  default     = null
 }
 
 variable "software_code" {
   description = "(Optional) Server image code."
   type        = string
-  default = null
+  default     = null
 }
 
 variable "autoscale" {
@@ -46,7 +46,7 @@ variable "label" {
   - key - (Required) Label key.
   - value - (Required) Label value.
   EOF
-  type        = object({
+  type = object({
     key   = string
     value = string
   })
@@ -60,7 +60,7 @@ variable "taint" {
   - value - (Required) Taint value.
   - effect - (Required) Taint effect.
   EOF
-  type        = object({
+  type = object({
     key    = string
     value  = string
     effect = string
