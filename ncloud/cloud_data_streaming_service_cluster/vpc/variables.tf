@@ -1,26 +1,26 @@
 variable "name" {
   description = "(Required) Cluster name."
-  type = string
+  type        = string
 }
 
 variable "kafka_version_code" {
   description = "(Required) Cloud Data Streaming Service version to be used."
-  type = string
+  type        = string
 }
 
 variable "config_group_no" {
   description = "(Required) ConfigGroup number to be used."
-  type = string
+  type        = string
 }
 
 variable "vpc_no" {
   description = "(Required) VPC number to be used."
-  type = string
+  type        = string
 }
 
 variable "os_image" {
   description = "(Required) OS type to be used."
-  type = string
+  type        = string
 }
 
 variable "cmak" {
@@ -30,7 +30,7 @@ variable "cmak" {
   - user_password - (Required) CMAK access password. Must be at least 8 characters and contain at least one of each: English uppercase letter, lowercase letter, special character, and number.
   EOF
   type = object({
-    user_name = string
+    user_name     = string
     user_password = string
   })
 }
@@ -43,7 +43,7 @@ variable "manager_node" {
   EOF
   type = object({
     node_product_code = string
-    subnet_no = string
+    subnet_no         = string
   })
 }
 
@@ -57,8 +57,8 @@ variable "broker_nodes" {
   EOF
   type = object({
     node_product_code = string
-    subnet_no = string
-    node_count = number
-    storage_size = number
+    subnet_no         = string
+    node_count        = number
+    storage_size      = number
   })
 }

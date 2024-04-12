@@ -1,15 +1,15 @@
 variable "name" {
   description = "(Required) ConfigGroup name."
-  type       = string
+  type        = string
 }
 
 variable "kafka_version_code" {
   description = "(Required) Cloud Data Streaming Service version to be used."
-  type       = string
+  type        = string
 }
 
 variable "description" {
   description = "(Optional) ConfigGroup description."
-  type       = string
-  default = null
+  type        = string
+  default     = null
 }

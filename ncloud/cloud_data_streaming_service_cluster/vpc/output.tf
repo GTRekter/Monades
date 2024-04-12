@@ -1,6 +1,6 @@
 output "id" {
   description = "Cluster id."
-  value = "${ncloud_cdss_cluster.cdss_cluster.id}"
+  value       = ncloud_cdss_cluster.cdss_cluster.id
 }
 
 output "endpoints" {
@@ -16,5 +16,5 @@ List of endpoints
 -hosts_public_endpoint_tls - Editing details of the hosts file (Public IP hostname format).
 -zookeeper - List of ZooKeeper nodes (Port 2181).
 EOF
-  value = "${ncloud_cdss_cluster.cdss_cluster.endpoints}"
+  value       = ncloud_cdss_cluster.cdss_cluster.endpoints
 }
