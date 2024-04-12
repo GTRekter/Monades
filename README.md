@@ -10,28 +10,43 @@ Welcome to the Monades repository, a comprehensive library of reusable Terraform
   - **synapse_sql_pool**: The synapse_sql_pool module is designed for comprehensive management of Azure Synapse SQL Pools. It includes configuring the main SQL pool with various options such as SKU name and storage type, implementing extended auditing policies with detailed logging, setting up security alert policies with alert management and email notifications, and enabling vulnerability assessments which include recurring scans and storage configurations. 
   - **synapse_workspace**: The synapse_workspace module is designed to manage Azure Synapse Workspace resources effectively. It includes the primary Synapse Workspace setup, Azure AD and SQL AD admin configurations, firewall rules, and comprehensive security and auditing policies. The module sets up the workspace with Azure Data Lake Gen2 filesystem integration, configures administrators for both Azure AD and SQL, and establishes security measures such as firewall rules, extended auditing policies, security alert policies, and vulnerability assessments. 
 - **ncloud**: Naver Cloud modules, including:
+  - **access_control_group**: Provides an ACG(Access Control Group) resource. Available only in VPC.
+  - **access_control_group_rule**: Provides an rule of ACG(Access Control Group) resource. Available only in VPC.
   - **auto_scaling_group**: Manages auto-scaling groups to automatically scale resources. Available in both Classic and VPC environments.
   - **auto_scaling_policy**:  Configures policies for auto-scaling groups that determine when and how to scale. Applies to both environments.
   - **auto_scaling_schedule**: Schedules scaling actions like scaling up or down at specific times. Available in both Classic and VPC environments.
+  - **block_storage**: Provides a Block Storage resource. Available in both Classic and VPC environments.
+  - **block_storage_snapshot**: Provides a ncloud Block Storage Snapshot resource. Available only in Classic.
   - **cloud_data_streaming_service_cluster**: Deploys and manages clusters for streaming data services, available only in VPC.
   - **cloud_data_streaming_service_config_group**: Manages configuration groups for cloud data streaming services, available only in VPC.
+  - **init_script**: Provides an Init Script resource. Available in both Classic and VPC environments.
   - **kubernetes_cluster**: Sets up and manages Kubernetes clusters, available only in VPC.
   - **kubernetes_node_pool**: Manages node pools within Kubernetes clusters, available only in VPC.
   - **launch_configuration**: Defines configurations for launching instances within auto-scaling groups. Available in both Classic and VPC environments.
-  - **load_balancer**: Provides load balancing across multiple compute resources, available in both Classic and VPC environments.
+  - **load_balancer**: Provides load balancing across multiple compute resources. Available in both Classic and VPC environments.
   - **load_balancer_listener**: Manages listeners for load balancers, routing traffic according to rules. Available only in VPC.
-  - **load_balancer_ssl_certificate**: Manages SSL certificates for load balancers, available only in Classic.
+  - **load_balancer_ssl_certificate**: Manages SSL certificates for load balancers, Available only in Classic.
   - **load_balancer_target_group**: Manages target groups for routing traffic to registered targets in VPC environments.
+  - **login_key**: Provides a Login key resource. Available in both Classic and VPC environments.
   - **mongodb**: Deploys and configures MongoDB instances, available only in VPC.
   - **mssql**: Deploys and manages Microsoft SQL Server instances, available only in VPC.
+  - **mysql**:
+  - **nas_volume**:
   - **nat_gateway**: Provides Network Address Translation (NAT) services for instances in a private subnet to access the Internet or other services. Available only in VPC.
   - **network_acl**: Manages Network Access Control Lists (ACLs) which provide stateless network traffic filtering. Available only in VPC environments.
   - **network_acl_deny_allow_group**: Manages groups within Network ACLs that specify deny or allow rules. Available only in VPC.
   - **network_acl_rule**: Adds or removes rules in a Network ACL to control traffic in and out of associated subnets. Available only in VPC.
   - **network_interface**: Manages network interfaces (NICs), which are used to communicate within the cloud environment. Available only in VPC.
+  - **placement_group**: Provides a Placement Group resource. Available in both Classic and VPC environments.
+  - **port_forwarding_rule**: Provides a ncloud port forwarding rule resource. Available only in Classic.
+  - **public_ip**: Provides a Public IP instance resource. Available in both Classic and VPC environments.
+  - **redis**: TBD
+  - **redis_config_group**: TBD
   - **route**: Manages routing tables within a specified route table. Available only in VPC.
   - **route_table**: Manages route tables, which define routing rules for network traffic. 
   - **route_table_association**: Associates subnets with a specified route table. Available only in VPC.
+  - **search_engine_service_cluster**: TBD
+  - **server**: Provides a Server instance resource. Available in both Classic and VPC environments.
   - **subnet**: Manages subnets within VPC, which partition the network to enhance security and performance. Available only in VPC.
   - **target_group_attachment**: Attaches targets instances to a target group in a load balancer, available only in VPC.
   - **vpc**: Sets up and manages Virtual Private Clouds (VPCs), offering isolated networking within Naver Cloud. Available only in VPC.
