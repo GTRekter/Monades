@@ -23,8 +23,19 @@ Welcome to the Monades repository, a comprehensive library of reusable Terraform
   - **load_balancer_ssl_certificate**: Manages SSL certificates for load balancers, available only in Classic.
   - **load_balancer_target_group**: Manages target groups for routing traffic to registered targets in VPC environments.
   - **mongodb**: Deploys and configures MongoDB instances, available only in VPC.
+  - **mssql**: Deploys and manages Microsoft SQL Server instances, available only in VPC.
+  - **nat_gateway**: Provides Network Address Translation (NAT) services for instances in a private subnet to access the Internet or other services. Available only in VPC.
+  - **network_acl**: Manages Network Access Control Lists (ACLs) which provide stateless network traffic filtering. Available only in VPC environments.
+  - **network_acl_deny_allow_group**: Manages groups within Network ACLs that specify deny or allow rules. Available only in VPC.
+  - **network_acl_rule**: Adds or removes rules in a Network ACL to control traffic in and out of associated subnets. Available only in VPC.
+  - **network_interface**: Manages network interfaces (NICs), which are used to communicate within the cloud environment. Available only in VPC.
+  - **route**: Manages routing tables within a specified route table. Available only in VPC.
+  - **route_table**: Manages route tables, which define routing rules for network traffic. 
+  - **route_table_association**: Associates subnets with a specified route table. Available only in VPC.
+  - **subnet**: Manages subnets within VPC, which partition the network to enhance security and performance. Available only in VPC.
   - **target_group_attachment**: Attaches targets instances to a target group in a load balancer, available only in VPC.
-
+  - **vpc**: Sets up and manages Virtual Private Clouds (VPCs), offering isolated networking within Naver Cloud. Available only in VPC.
+  - **vpc_peering**: Manages VPC peering connections, which allow networking connections between two VPCs to route traffic. Available only in VPC.
 ## Getting Started
 Clone the repository and follow the individual module's README for setup instructions.
 
