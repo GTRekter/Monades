@@ -9,6 +9,21 @@ Welcome to the Monades repository, a comprehensive library of reusable Terraform
   - **synapse_link**: The synapse_link module focuses on integrating and linking services within Azure Synapse. It includes resources for setting up an Azure Synapse Integration Runtime, which is essential for data processing tasks, and configuring Synapse Linked Services for connecting to various data sources or services. The integration runtime resource is defined with customizable options like compute type and core count, while the linked service resource manages connections to external services, underpinned by the integration runtime.
   - **synapse_sql_pool**: The synapse_sql_pool module is designed for comprehensive management of Azure Synapse SQL Pools. It includes configuring the main SQL pool with various options such as SKU name and storage type, implementing extended auditing policies with detailed logging, setting up security alert policies with alert management and email notifications, and enabling vulnerability assessments which include recurring scans and storage configurations. 
   - **synapse_workspace**: The synapse_workspace module is designed to manage Azure Synapse Workspace resources effectively. It includes the primary Synapse Workspace setup, Azure AD and SQL AD admin configurations, firewall rules, and comprehensive security and auditing policies. The module sets up the workspace with Azure Data Lake Gen2 filesystem integration, configures administrators for both Azure AD and SQL, and establishes security measures such as firewall rules, extended auditing policies, security alert policies, and vulnerability assessments. 
+- **ncloud**: Naver Cloud modules, including:
+  - **auto_scaling_group**: Manages auto-scaling groups to automatically scale resources. Available in both Classic and VPC environments.
+  - **auto_scaling_policy**:  Configures policies for auto-scaling groups that determine when and how to scale. Applies to both environments.
+  - **auto_scaling_schedule**: Schedules scaling actions like scaling up or down at specific times. Available in both Classic and VPC environments.
+  - **cloud_data_streaming_service_cluster**: Deploys and manages clusters for streaming data services, available only in VPC.
+  - **cloud_data_streaming_service_config_group**: Manages configuration groups for cloud data streaming services, available only in VPC.
+  - **kubernetes_cluster**: Sets up and manages Kubernetes clusters, available only in VPC.
+  - **kubernetes_node_pool**: Manages node pools within Kubernetes clusters, available only in VPC.
+  - **launch_configuration**: Defines configurations for launching instances within auto-scaling groups. Available in both Classic and VPC environments.
+  - **load_balancer**: Provides load balancing across multiple compute resources, available in both Classic and VPC environments.
+  - **load_balancer_listener**: Manages listeners for load balancers, routing traffic according to rules. Available only in VPC.
+  - **load_balancer_ssl_certificate**: Manages SSL certificates for load balancers, available only in Classic.
+  - **load_balancer_target_group**: Manages target groups for routing traffic to registered targets in VPC environments.
+  - **mongodb**: Deploys and configures MongoDB instances, available only in VPC.
+  - **target_group_attachment**: Attaches targets instances to a target group in a load balancer, available only in VPC.
 
 ## Getting Started
 Clone the repository and follow the individual module's README for setup instructions.
