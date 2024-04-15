@@ -1,10 +1,12 @@
 name: Test Modules via Terraform Plan
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
-      - develop
 
 jobs:
   terraform:
