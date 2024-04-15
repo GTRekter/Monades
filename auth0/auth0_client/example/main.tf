@@ -2,12 +2,13 @@ terraform {
   required_providers {
     auth0 = {
       source  = "auth0/auth0"
-      version = ">= 1.2"
+      version = "~> 1.2"
     }
   }
 }
 
 provider "auth0" {
+  debug = false
 }
 
 module "client" {
