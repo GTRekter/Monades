@@ -16,7 +16,7 @@ env:
   # Naver Cloud
   NCLOUD_ACCESS_KEY: ${{ secrets.NCLOUD_ACCESS_KEY }}
   NCLOUD_SECRET_KEY: ${{ secrets.NCLOUD_SECRET_KEY }}
-  NCLOUD_REGION: 'KR'
+  NCLOUD_REGION: ${{ secrets.NCLOUD_REGION }}
 
 jobs:
   terraform:
