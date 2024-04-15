@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: Development
     env:
-        TF_LOG: TRACE
+        TF_LOG: ERROR
         # Azure
         ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
         ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
@@ -29,18 +29,20 @@ jobs:
         run: |
           source_branch="${{ github.head_ref }}"
           target_branch="${{ github.base_ref }}"
+          echo "\e[0;35mFetching changes between $source_branch and $target_branch\e[0m"
           git fetch origin
           git checkout -b "$target_branch" origin/"$target_branch"
           git checkout -b "$source_branch" origin/"$source_branch"
           git diff --name-only "$target_branch" "$source_branch"
           changes=$(git diff --name-only "$target_branch" "$source_branch" | xargs -I {} dirname {} | grep -v "/example$" | sort -u)
+          echo "\e[0;35mChanges detected in the following modules: $changes\e[0m"
           for module in $changes; do
             if [ -d "$module/example" ]; then
-              echo "Running terraform plan for module: $module"
+              echo -e "\e[0;35mRunning terraform plan for module: $module\e[0m"
               terraform -chdir="$module/example" init
               terraform -chdir="$module/example" plan -no-color -out="plan_file"
               cat plan_file
             else
-              echo "No 'example' folder found in module: $module"
+                echo -e "\e[38;5;214mNo 'example' folder found in module: $module\e[0m"
             fi
           done
