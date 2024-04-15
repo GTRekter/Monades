@@ -14,7 +14,7 @@ resource "ncloud_vpc" "vpc" {
 }
 
 module "access_control_group" {
-  source      = "../access_control_group/vpc"
+  source      = "../"
   vpc_no      = ncloud_vpc.vpc.id
   name        = "example-acg"
   description = "example description"
