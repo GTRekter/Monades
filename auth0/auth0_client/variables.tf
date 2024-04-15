@@ -1,92 +1,3 @@
-resource "auth0_client" "client" {
-  name = var.name
-  dynamic "addons" {
-    for_each = var.addons == null ? [] : [var.addons]
-    content {
-      dynamic "samlp" {
-        for_each = addons.value.samlp == null ? [] : [addons.value.samlp]
-        content {
-          audience                      = samlp.value.audience
-          authn_context_class_ref       = samlp.value.authn_context_class_ref
-          binding                       = samlp.value.binding
-          create_upn_claim              = samlp.value.create_upn_claim
-          destination                   = samlp.value.destination
-          digest_algorithm              = samlp.value.digest_algorithm
-          include_attribute_name_format = samlp.value.include_attribute_name_format
-          issuer                        = samlp.value.issuer
-          lifetime_in_seconds           = samlp.value.lifetime_in_seconds
-          dynamic "logout" {
-            for_each = samlp.value.logout == null ? [] : [samlp.value.logout]
-            content {
-              callback    = logout.value.callback
-              slo_enabled = logout.value.slo_enabled
-            }
-          }
-          map_identities                     = samlp.value.map_identities
-          map_unknown_claims_as_is           = samlp.value.map_unknown_claims_as_is
-          mappings                           = samlp.value.mappings
-          name_identifier_format             = samlp.value.name_identifier_format
-          name_identifier_probes             = samlp.value.name_identifier_probes
-          passthrough_claims_with_no_mapping = samlp.value.passthrough_claims_with_no_mapping
-          recipient                          = samlp.value.recipient
-          sign_response                      = samlp.value.sign_response
-          signature_algorithm                = samlp.value.signature_algorithm
-          signing_cert                       = samlp.value.signing_cert
-          typed_attributes                   = samlp.value.typed_attributes
-        }
-      }
-    }
-  }
-  allowed_clients                     = var.allowed_clients
-  allowed_logout_urls                 = var.allowed_logout_urls
-  allowed_origins                     = var.allowed_origins
-  app_type                            = var.app_type
-  callbacks                           = var.callbacks
-  client_aliases                      = var.client_aliases
-  client_metadata                     = var.client_metadata
-  cross_origin_auth                   = var.cross_origin_auth
-  cross_origin_loc                    = var.cross_origin_loc
-  custom_login_page                   = var.custom_login_page
-  custom_login_page_on                = var.custom_login_page_on
-  description                         = var.description
-  encryption_key                      = var.encryption_key
-  form_template                       = var.form_template
-  grant_types                         = var.grant_types
-  initiate_login_uri                  = var.initiate_login_uri
-  is_first_party                      = var.is_first_party
-  is_token_endpoint_ip_header_trusted = var.is_token_endpoint_ip_header_trusted
-  dynamic "jwt_configuration" {
-    for_each = var.jwt_configuration == null ? [] : [var.jwt_configuration]
-    content {
-      alg                 = jwt_configuration.value.alg
-      lifetime_in_seconds = jwt_configuration.value.lifetime_in_seconds
-      scopes              = jwt_configuration.value.scopes
-      secret_encoded      = jwt_configuration.value.secret_encoded
-    }
-  }
-  logo_uri                      = var.logo_uri
-  oidc_backchannel_logout_urls  = var.oidc_backchannel_logout_urls
-  oidc_conformant               = var.oidc_conformant
-  organization_require_behavior = var.organization_require_behavior
-  organization_usage            = var.organization_usage
-  dynamic "refresh_token" {
-    for_each = var.refresh_token == null ? [] : [var.refresh_token]
-    content {
-      expiration_type              = refresh_token.value.expiration_type
-      rotation_type                = refresh_token.value.rotation_type
-      idle_token_lifetime          = refresh_token.value.idle_token_lifetime
-      infinite_idle_token_lifetime = refresh_token.value.infinite_idle_token_lifetime
-      infinite_token_lifetime      = refresh_token.value.infinite_token_lifetime
-      leeway                       = refresh_token.value.leeway
-      token_lifetime               = refresh_token.value.token_lifetime
-    }
-  }
-  require_pushed_authorization_requests = var.require_pushed_authorization_requests
-  sso                                   = var.sso
-  sso_disabled                          = var.sso_disabled
-  web_origins                           = var.web_origins
-}
-
 # TODO:
 # addons (Block List, Max: 1) Addons enabled for this client and their associated configurations. (see below for nested schema)
 # mobile (Block List, Max: 1) Additional configuration for native mobile apps. (see below for nested schema)
@@ -98,8 +9,65 @@ variable "name" {
   type        = string
 }
 
-# variable "addons" {
-# }
+variable "addons" {
+  description = <<EOF
+  (Optional) Addons enabled for this client and their associated configurations.
+    - samlp - (Optional) Configuration settings for the SAML protocol.
+        - audience - (Optional) Audience for the SAML assertion.
+        - authn_context_class_ref - (Optional) Authentication context class reference.
+        - binding - (Optional) SAML binding type. Possible values are: urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST, urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect.
+        - create_upn_claim - (Optional) Whether to create a UPN claim from the email claim.
+        - destination - (Optional) Destination for the SAML assertion.
+        - digest_algorithm - (Optional) Algorithm used to calculate the digest of the SAML Assertion or response. Options include sha1 and sha256. Defaults to sha1.
+        - include_attribute_name_format - (Optional) Whether to include the attribute name format in the SAML assertion.
+        - issuer - (Optional) Issuer of the SAML assertion.
+        - lifetime_in_seconds - (Optional) Lifetime of the SAML assertion in seconds.
+        - logout - (Optional) Configuration settings for the SAML logout.
+            - callback (String) The service provider (client application)'s Single Logout Service URL, where Auth0 will send logout requests and responses.
+            - slo_enabled (Boolean) Controls whether Auth0 should notify service providers of session termination.
+        - callback - (Optional) URL to redirect to after logout.
+        - slo_enabled - (Optional) Whether single logout is enabled.
+        - map_identities - (Optional) Whether to map identities.
+        - map_unknown_claims_as_is - (Optional) Whether to map unknown claims as is.
+        - mappings - (Optional) Mappings of attributes.
+        - name_identifier_format - (Optional) Name identifier format.
+        - name_identifier_probes - (Optional) Name identifier probes.
+        - passthrough_claims_with_no_mapping - (Optional) Whether to pass through claims with no mapping.
+        - recipient - (Optional) Recipient for the SAML assertion.
+        - sign_response - (Optional) Whether to sign the SAML response.
+        - signature_algorithm - (Optional) Signature algorithm used to sign the SAML assertion.
+        - signing_cert - (Optional) Signing certificate.
+        - typed_attributes - (Optional) Whether to use typed attributes.
+  type = object({
+    samlp = optional(object({
+      audience                      = optional(string)
+      authn_context_class_ref       = optional(string)
+      binding                       = optional(string)
+      create_upn_claim              = optional(bool)
+      destination                   = optional(string)
+      digest_algorithm              = optional(string)
+      include_attribute_name_format = optional(bool)
+      issuer                        = optional(string)
+      lifetime_in_seconds           = optional(number)
+      logout = optional(object({
+        callback = optional(string)
+        slo_enabled = optional(bool)
+      }))
+      map_identities                     = optional(bool)
+      map_unknown_claims_as_is           = optional(bool)
+      mappings                           = optional(map(string))
+      name_identifier_format             = optional(string)
+      name_identifier_probes             = optional(list(string))
+      passthrough_claims_with_no_mapping = optional(bool)
+      recipient                          = optional(string)
+      sign_response                      = optional(bool)
+      signature_algorithm                = optional(string)
+      signing_cert                       = optional(string)
+      typed_attributes                   = optional(bool)
+    }))
+  })
+  default = null
+}
 
 variable "allowed_clients" {
   description = "(Optional) List of applications ID's that will be allowed to make delegation request. By default, all applications will be allowed."
