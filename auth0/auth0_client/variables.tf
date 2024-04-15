@@ -38,6 +38,7 @@ variable "addons" {
         - signature_algorithm - (Optional) Signature algorithm used to sign the SAML assertion.
         - signing_cert - (Optional) Signing certificate.
         - typed_attributes - (Optional) Whether to use typed attributes.
+EOF
   type = object({
     samlp = optional(object({
       audience                      = optional(string)
