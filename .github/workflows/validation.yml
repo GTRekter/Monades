@@ -40,8 +40,7 @@ jobs:
             if [ -d "$module/example" ]; then
               echo -e "\e[0;35mRunning terraform plan for module: $module\e[0m"
               terraform -chdir="$module/example" init
-              terraform -chdir="$module/example" plan -no-color -out="plan_file"
-              cat plan_file
+              terraform -chdir="$module/example" plan -no-color
             else
                 echo -e "\e[38;5;214mNo 'example' folder found in module: $module\e[0m"
             fi
