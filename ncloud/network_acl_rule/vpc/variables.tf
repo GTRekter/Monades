@@ -15,14 +15,14 @@ variable "inbound" {
   NOTE: If the value of protocol is ICMP, the port_range values will be ignored and the rule will apply to all ports.
   - description - (Optional) description to create.
 EOF
-  type        = list(object({
-    priority          = number
-    protocol          = string
-    rule_action       = string
-    ip_block          = optional(string)
+  type = list(object({
+    priority            = number
+    protocol            = string
+    rule_action         = string
+    ip_block            = optional(string)
     deny_allow_group_no = optional(string)
-    port_range        = optional(string)
-    description       = optional(string)
+    port_range          = optional(string)
+    description         = optional(string)
   }))
   default = []
 }
@@ -39,14 +39,14 @@ variable "outbound" {
   NOTE: If the value of protocol is ICMP, the port_range values will be ignored and the rule will apply to all ports.
   - description - (Optional) description to create.
 EOF
-  type        = list(object({
-    priority          = number
-    protocol          = string
-    rule_action       = string
-    ip_block          = optional(string)
+  type = list(object({
+    priority            = number
+    protocol            = string
+    rule_action         = string
+    ip_block            = optional(string)
     deny_allow_group_no = optional(string)
-    port_range        = optional(string)
-    description       = optional(string)
+    port_range          = optional(string)
+    description         = optional(string)
   }))
   default = []
 }

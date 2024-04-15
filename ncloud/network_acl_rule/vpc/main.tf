@@ -3,25 +3,25 @@ resource "ncloud_network_acl_rule" "nacl_rule" {
   dynamic "inbound" {
     for_each = var.inbound
     content {
-      priority          = inbound.value.priority
-      protocol          = inbound.value.protocol
-      rule_action       = inbound.value.rule_action
-      ip_block          = inbound.value.ip_block
+      priority            = inbound.value.priority
+      protocol            = inbound.value.protocol
+      rule_action         = inbound.value.rule_action
+      ip_block            = inbound.value.ip_block
       deny_allow_group_no = inbound.value.deny_allow_group_no
-      port_range        = inbound.value.port_range
-      description       = inbound.value.description
+      port_range          = inbound.value.port_range
+      description         = inbound.value.description
     }
   }
   dynamic "outbound" {
     for_each = var.outbound
     content {
-      priority          = outbound.value.priority
-      protocol          = outbound.value.protocol
-      rule_action       = outbound.value.rule_action
-      ip_block          = outbound.value.ip_block
+      priority            = outbound.value.priority
+      protocol            = outbound.value.protocol
+      rule_action         = outbound.value.rule_action
+      ip_block            = outbound.value.ip_block
       deny_allow_group_no = outbound.value.deny_allow_group_no
-      port_range        = outbound.value.port_range
-      description       = outbound.value.description
+      port_range          = outbound.value.port_range
+      description         = outbound.value.description
     }
   }
 }
@@ -43,14 +43,14 @@ variable "inbound" {
   NOTE: If the value of protocol is ICMP, the port_range values will be ignored and the rule will apply to all ports.
   - description - (Optional) description to create.
 EOF
-  type        = list(object({
-    priority          = number
-    protocol          = string
-    rule_action       = string
-    ip_block          = optional(string)
+  type = list(object({
+    priority            = number
+    protocol            = string
+    rule_action         = string
+    ip_block            = optional(string)
     deny_allow_group_no = optional(string)
-    port_range        = optional(string)
-    description       = optional(string)
+    port_range          = optional(string)
+    description         = optional(string)
   }))
   default = []
 }
@@ -67,14 +67,14 @@ variable "outbound" {
   NOTE: If the value of protocol is ICMP, the port_range values will be ignored and the rule will apply to all ports.
   - description - (Optional) description to create.
 EOF
-  type        = list(object({
-    priority          = number
-    protocol          = string
-    rule_action       = string
-    ip_block          = optional(string)
+  type = list(object({
+    priority            = number
+    protocol            = string
+    rule_action         = string
+    ip_block            = optional(string)
     deny_allow_group_no = optional(string)
-    port_range        = optional(string)
-    description       = optional(string)
+    port_range          = optional(string)
+    description         = optional(string)
   }))
   default = []
 }

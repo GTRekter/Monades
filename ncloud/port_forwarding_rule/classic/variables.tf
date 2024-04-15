@@ -12,7 +12,7 @@ variable "port_forwarding_internal_port" {
   description = "(Required) Internal port for port forwarding. Only the following ports are available. [Linux: 22 | Windows: 3389]"
   type        = number
   validation {
-    condition = can(regex("^(22|3389)$", var.port_forwarding_internal_port))
+    condition     = can(regex("^(22|3389)$", var.port_forwarding_internal_port))
     error_message = "port_forwarding_internal_port must be either 22 or 3389."
   }
 }
@@ -20,5 +20,5 @@ variable "port_forwarding_internal_port" {
 variable "port_forwarding_configuration_no" {
   description = "(Optional) Port forwarding configuration number. You can get by calling data ncloud_port_forwarding_rules"
   type        = string
-  default = null
+  default     = null
 }

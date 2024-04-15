@@ -6,21 +6,21 @@ variable "content" {
 variable "name" {
   description = "(Optional) The name to create. If omitted, Terraform will assign a random, unique name."
   type        = string
-  default = null
+  default     = null
 }
 
 variable "description" {
   description = "(Optional) description to create."
   type        = string
-  default = null
+  default     = null
 }
 
 variable "os_type" {
   description = "(Optional) Type of O/S to apply server instance. Default LNX. Accepted values: LNX (LINUX) | WND (WINDOWS)"
   type        = string
-  default = "LNX"
+  default     = "LNX"
   validation {
-    condition = can(regex("^(LNX|WND)$", var.os_type))
+    condition     = can(regex("^(LNX|WND)$", var.os_type))
     error_message = "os_type must be either LNX or WND."
   }
 }

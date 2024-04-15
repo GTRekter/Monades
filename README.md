@@ -30,8 +30,8 @@ Welcome to the Monades repository, a comprehensive library of reusable Terraform
   - **login_key**: Provides a Login key resource. Available in both Classic and VPC environments.
   - **mongodb**: Deploys and configures MongoDB instances, available only in VPC.
   - **mssql**: Deploys and manages Microsoft SQL Server instances, available only in VPC.
-  - **mysql**:
-  - **nas_volume**:
+  - **mysql**: **TBD**
+  - **nas_volume**: Provides a NAS Volume. Available in both Classic and VPC environments.
   - **nat_gateway**: Provides Network Address Translation (NAT) services for instances in a private subnet to access the Internet or other services. Available only in VPC.
   - **network_acl**: Manages Network Access Control Lists (ACLs) which provide stateless network traffic filtering. Available only in VPC environments.
   - **network_acl_deny_allow_group**: Manages groups within Network ACLs that specify deny or allow rules. Available only in VPC.
@@ -40,12 +40,12 @@ Welcome to the Monades repository, a comprehensive library of reusable Terraform
   - **placement_group**: Provides a Placement Group resource. Available in both Classic and VPC environments.
   - **port_forwarding_rule**: Provides a ncloud port forwarding rule resource. Available only in Classic.
   - **public_ip**: Provides a Public IP instance resource. Available in both Classic and VPC environments.
-  - **redis**: TBD
-  - **redis_config_group**: TBD
+  - **redis**: Provides a Redis resource. Available only in VPC.
+  - **redis_config_group**: Provides a Redis Config Group resource. Available only in VPC.
   - **route**: Manages routing tables within a specified route table. Available only in VPC.
   - **route_table**: Manages route tables, which define routing rules for network traffic. 
   - **route_table_association**: Associates subnets with a specified route table. Available only in VPC.
-  - **search_engine_service_cluster**: TBD
+  - **search_engine_service_cluster**: Provides a Search engine Service Cluster resource. Available only in VPC.
   - **server**: Provides a Server instance resource. Available in both Classic and VPC environments.
   - **subnet**: Manages subnets within VPC, which partition the network to enhance security and performance. Available only in VPC.
   - **target_group_attachment**: Attaches targets instances to a target group in a load balancer, available only in VPC.

@@ -6,11 +6,11 @@ variable "vpc_no" {
 variable "name" {
   description = "(Optional) The name to create. If omitted, Terraform will assign a random, unique name."
   type        = string
-  default = null
+  default     = null
 }
 
 variable "description" {
   description = "(Optional) Indicates whether to get default group only."
   type        = string
-  default = null
+  default     = null
 }

@@ -8,7 +8,7 @@ variable "placement_group_type" {
   type        = string
   default     = "AA"
   validation {
-    condition = can(regex("AA", var.placement_group_type))
+    condition     = can(regex("AA", var.placement_group_type))
     error_message = "Placement group type must be 'AA'"
   }
 }

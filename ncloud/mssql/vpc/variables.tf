@@ -19,7 +19,7 @@ variable "service_name" {
 variable "is_ha" {
   description = "(Required) Whether is High Availability or not. If High Availability is selected, 2 servers including the Standby Master server will be created and additional charges will be incurred. Default : true."
   type        = bool
-  default = true
+  default     = true
 }
 
 variable "user_name" {
@@ -51,35 +51,35 @@ variable "user_password" {
 variable "config_group_no" {
   description = "(Optional) MSSQL config group Number. Already-created Config Group can be applied when creating a server. When you do not have any config groups, you can select from provided config groups by default. You can view through getCloudMssqlConfigGroupList API. Default: 0"
   type        = string
-  default = "0"
+  default     = "0"
 }
 
 variable "image_product_code" {
   description = "(Optional) Image product code to determine the MSSQL instance server image specification to create. If not entered, the instance is created for default value. It can be obtained through ncloud_mssql_image_products data source"
   type        = string
-  default = null
+  default     = null
 }
 
 variable "product_code" {
   description = "(Optional) Product code to determine the MSSQL instance server image specification to create. It can be obtained through ncloud_mssql_products data source. Default : Minimum specifications(1 memory, 2 cpu)"
   type        = string
-  default = null
+  default     = null
 }
 
 variable "data_storage_type" {
   description = "(Optional) Data storage type. You can select SSD|HDD. Default: SSD"
   type        = string
-  default = "SSD"
-    validation {
+  default     = "SSD"
+  validation {
     condition     = can(regex("^(SSD|HDD)$", var.data_storage_type))
     error_message = "The data_storage_type must be either SSD or HDD."
-    }
+  }
 }
 
 variable "backup_file_retention_period" {
   description = "(Optional) Backups are performed daily and backup files are stored in separate backup storage. Fees are charged based on the space used. Default : 1(1 day), Min: 1, Max: 30"
   type        = number
-  default = 1
+  default     = 1
   validation {
     condition     = var.backup_file_retention_period >= 1 && var.backup_file_retention_period <= 30
     error_message = "The backup_file_retention_period must be between 1 and 30."
@@ -89,19 +89,19 @@ variable "backup_file_retention_period" {
 variable "backup_time" {
   description = "(Optional, Required if is_backup is true and is_automatic_backup is false) You can set the time when backup is performed. it must be entered if backup status(is_backup) is true and automatic backup status(is_automatic_backup) is false."
   type        = string
-  default = null
+  default     = null
 }
 
 variable "is_automatic_backup" {
   description = "(Optional) You can select whether to automatically set the backup time. if is_automatic_backup is true, backup_time cannot be entered. Default : true"
   type        = bool
-  default = true
+  default     = true
 }
 
 variable "port" {
   description = "(Optional) You can set TCP port to access the mssql instance. Default : 1433, Min: 10000, Max: 20000"
   type        = number
-  default = 1433
+  default     = 1433
   validation {
     condition     = var.port >= 10000 && var.port <= 20000
     error_message = "The port must be between 10000 and 20000."
@@ -111,7 +111,7 @@ variable "port" {
 variable "character_set_name" {
   description = "(Optional) DB character set can be selected from Korean and English collation. You can view through getCloudMssqlCharacterSetList API. Default: Korean_Wansung_CI_AS. Options: Korean_Wansung_CI_AS, SQL_Latin1_General_CP1_CI_AS"
   type        = string
-  default = "Korean_Wansung_CI_AS"
+  default     = "Korean_Wansung_CI_AS"
   validation {
     condition     = can(regex("^(Korean_Wansung_CI_AS|SQL_Latin1_General_CP1_CI_AS)$", var.character_set_name))
     error_message = "The character_set_name must be either Korean_Wansung_CI_AS or SQL_Latin1_General_CP1_CI_AS."

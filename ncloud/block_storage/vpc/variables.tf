@@ -11,21 +11,21 @@ variable "server_instance_no" {
 variable "name" {
   description = "(Optional) The name to create. If omitted, Terraform will assign a random, unique name."
   type        = string
-  default = null
+  default     = null
 }
 
 variable "description" {
   description = "(Optional) description to create."
   type        = string
-  default = null
+  default     = null
 }
 
 variable "disk_detail_type" {
   description = "(Optional) Type of block storage disk detail to create. Default SSD. Accepted values: SSD | HDD"
   type        = string
-  default = "SSD"
+  default     = "SSD"
   validation {
-    condition = can(regex("^(SSD|HDD)$", var.disk_detail_type))
+    condition     = can(regex("^(SSD|HDD)$", var.disk_detail_type))
     error_message = "disk_detail_type must be either SSD or HDD."
   }
 }

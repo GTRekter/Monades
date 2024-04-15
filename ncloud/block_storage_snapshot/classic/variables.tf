@@ -6,11 +6,11 @@ variable "block_storage_instance_no" {
 variable "name" {
   description = "(Optional) Block storage snapshot name to create. default : Ncloud assigns default values."
   type        = string
-  default = null
+  default     = null
 }
 
 variable "description" {
   description = "(Optional) Descriptions on a snapshot to create."
   type        = string
-  default = null
+  default     = null
 }

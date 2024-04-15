@@ -12,12 +12,12 @@ variable "inbound" {
   - port_range - (Optional) Range of ports to apply. You can enter from 1 to 65535. e.g. set single port: 22 or set range port : 8000-9000
   - description - (Optional) description to create.
   EOF
-  type        = list(object({
-    protocol = string
-    ip_block = optional(string)
+  type = list(object({
+    protocol                       = string
+    ip_block                       = optional(string)
     source_access_control_group_no = optional(string)
-    port_range = string
-    description = optional(string)
+    port_range                     = string
+    description                    = optional(string)
   }))
   default = []
 }
@@ -31,12 +31,12 @@ variable "outbound" {
   - port_range - (Optional) Range of ports to apply. You can enter from 1 to 65535. e.g. set single port: 22 or set range port : 8000-9000
   - description - (Optional) description to create.
   EOF
-  type        = list(object({
-    protocol = string
-    ip_block = optional(string)
+  type = list(object({
+    protocol                       = string
+    ip_block                       = optional(string)
     source_access_control_group_no = optional(string)
-    port_range = string
-    description = optional(string)
+    port_range                     = string
+    description                    = optional(string)
   }))
   default = []
 }
