@@ -39,7 +39,7 @@ jobs:
           git checkout -b "$source_branch" origin/"$source_branch"
           git diff --name-only "$target_branch" "$source_branch"
           changes=$(git diff --name-only "$target_branch" "$source_branch" | xargs -I {} dirname {} | grep -v "/example$" | sort -u)
-          echo "\e[0;35mChanges detected in the following modules: $changes\e[0m"
+          echo -e "\e[0;35mChanges detected in the following modules: $changes\e[0m"
           for module in $changes; do
             if [ -d "$module/example" ]; then
               echo -e "\e[0;35mRunning terraform plan for module: $module\e[0m"
