@@ -8,9 +8,6 @@ terraform {
 }
 
 provider "auth0" {
-  domain        = ""
-  client_id     = ""
-  client_secret = ""
 }
 
 resource "auth0_client" "my_client" {
