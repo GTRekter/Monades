@@ -2,18 +2,17 @@ terraform {
   required_providers {
     auth0 = {
       source  = "auth0/auth0"
-      version = ">= 1.1.1"
+      version = "~> 1.2"
     }
   }
 }
 
 provider "auth0" {
-  domain        = ""
-  client_id     = ""
-  client_secret = ""
+  debug = false
 }
 
-resource "auth0_client" "my_client" {
+module "client" {
+  source                              = "../"
   name                                = "Application - Acceptance Test"
   description                         = "Test Applications Long Description"
   app_type                            = "non_interactive"
@@ -35,8 +34,7 @@ resource "auth0_client" "my_client" {
   client_metadata = {
     foo = "zoo"
   }
-
-  jwt_configuration {
+  jwt_configuration = {
     lifetime_in_seconds = 300
     secret_encoded      = true
     alg                 = "RS256"
@@ -44,23 +42,14 @@ resource "auth0_client" "my_client" {
       foo = "bar"
     }
   }
-
-  refresh_token {
+  refresh_token = {
     leeway          = 0
     token_lifetime  = 2592000
     rotation_type   = "rotating"
     expiration_type = "expiring"
   }
-
-  mobile {
-    ios {
-      team_id               = "9JA89QQLNQ"
-      app_bundle_identifier = "com.my.bundle.id"
-    }
-  }
-
-  addons {
-    samlp {
+  addons = {
+    samlp = {
       audience = "https://example.com/saml"
       issuer   = "https://example.com"
       mappings = {

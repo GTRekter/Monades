@@ -48,7 +48,6 @@ resource "azurerm_key_vault" "key_vault" {
 }
 
 module "key_vault_key" {
-  #  source                       = "git::https://dev.azure.com/portaivan/Training/_git/Training//keyvault-key?ref=main"
   source                        = "../"
   name                          = "kvk-${random_string.name.result}"
   key_vault_name                = "kv-${random_string.name.result}"
