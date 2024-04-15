@@ -1,1 +1,48 @@
+name: Test Modules via Terraform Plan
 
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+
+env:
+  TF_LOG: TRACE
+  # Azure
+  ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+  ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+  # Naver Cloud
+  NCLOUD_ACCESS_KEY: ${{ secrets.NCLOUD_ACCESS_KEY }}
+  NCLOUD_SECRET_KEY: ${{ secrets.NCLOUD_SECRET_KEY }}
+  NCLOUD_REGION: 'KR'
+
+jobs:
+  terraform:
+    name: Terraform
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Terraform Plan  
+        run: |
+          source_branch="${{ github.head_ref }}"
+          target_branch="${{ github.base_ref }}"
+          git fetch origin
+          git checkout -b "$target_branch" origin/"$target_branch"
+          git checkout -b "$source_branch" origin/"$source_branch"
+          git diff --name-only "$target_branch" "$source_branch"
+          changes=$(git diff --name-only "$target_branch" "$source_branch" | xargs -I {} dirname {} | grep -v "/example$" | sort -u)
+          for module in $changes; do
+            if [ -d "$module/example" ]; then
+              echo "Running terraform plan for module: $module"
+              terraform -chdir="$module/example" init
+              terraform -chdir="$module/example" plan -no-color -out="plan_file"
+              cat plan_file
+            else
+              echo "No 'example' folder found in module: $module"
+            fi
+          done
