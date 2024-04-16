@@ -1,10 +1,11 @@
 terraform {
+  required_version = ">= 0.13"
   required_providers {
     ncloud = {
-      source = "NaverCloudPlatform/ncloud"
+      source  = "NaverCloudPlatform/ncloud"
+      version = "3.0.0"
     }
   }
-  required_version = ">= 0.13"
 }
 
 provider "ncloud" {}
@@ -14,7 +15,7 @@ resource "ncloud_vpc" "vpc" {
 }
 
 module "access_control_group" {
-  source      = "../../../access_control_group/vpc"
+  source      = "../"
   vpc_no      = ncloud_vpc.vpc.id
   name        = "example-acg"
   description = "example description"
