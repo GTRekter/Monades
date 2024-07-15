@@ -1,24 +1,6 @@
-resource "ncloud_access_control_group_rule" "access_control_group_rule" {
-  access_control_group_no = var.access_control_group_no
-
-  dynamic "inbound" {
-    for_each = var.inbound
-    content {
-      protocol                       = inbound.value.protocol
-      ip_block                       = inbound.value.ip_block
-      source_access_control_group_no = inbound.value.source_access_control_group_no
-      port_range                     = inbound.value.port_range
-      description                    = inbound.value.description
-    }
-  }
-  dynamic "outbound" {
-    for_each = var.outbound
-    content {
-      protocol                       = outbound.value.protocol
-      ip_block                       = outbound.value.ip_block
-      source_access_control_group_no = outbound.value.source_access_control_group_no
-      port_range                     = outbound.value.port_range
-      description                    = outbound.value.description
-    }
-  }
+resource "nhncloud_blockstorage_volume_v2" "block_storage_volume_v2" {
+  name = "tf_volume_03"
+  description = "terraform create volume with snapshot test"
+  snapshot_id = data.nhncloud_blockstorage_snapshot_v2.snapshot_01.id
+  size = 30
 }
