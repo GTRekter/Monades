@@ -1,5 +1,7 @@
 
 $baseDir = "C:\Users\porta\OneDrive\Desktop\Monades\nhncloud"
+$terraformProvider = "nhncloud"
+
 Set-Location -Path $baseDir
 function Process-Subdirectory {
     param (
@@ -31,18 +33,18 @@ function Process-Subdirectory {
         $repoDescription = "Terraform module to create $($baseFolderName -replace '-', ' ') resources"
     }
     # Define the repository name and description
-    $repoName = "terraform-ncloud-$baseFolderName$subFolderName"
-    $repoHomepage = "https://registry.terraform.io/modules/terraform-navercloudplatform-modules/$baseFolderName$subFolderName/ncloud"
+    $repoName = "terraform-$terraformProvider-$baseFolderName$subFolderName"
+    $repoHomepage = "https://registry.terraform.io/modules/terraform-$terraformProvider-modules/$baseFolderName$subFolderName/$terraformProvider"
     Write-Debug "Repository name: $repoName"
     Write-Debug "Repository description: $repoDescription"
     Write-Debug "Repository homepage: $repoHomepage"
 
     Write-Debug "Create the repository in the GitHub organization"
-    gh repo create "terraform-navercloudplatform-modules/$repoName" --public -d "$repoDescription" --disable-wiki --homepage "$repoHomepage" --gitignore "Terraform"
-    Write-Output "Created GitHub repository: terraform-navercloudplatform-modules/$repoName"
+    gh repo create "terraform-$terraformProvider-modules/$repoName" --public -d "$repoDescription" --disable-wiki --homepage "$repoHomepage" --gitignore "Terraform"
+    Write-Output "Created GitHub repository: terraform-$terraformProvider-modules/$repoName"
 
     git init
-    git remote add origin "https://github.com/terraform-navercloudplatform-modules/$repoName.git"
+    git remote add origin "https://github.com/terraform-$terraformProvider-modules/$repoName.git"
     git config user.email "porta.ivan@outlook.com"
     git config user.name "Ivan Porta (GTRekter)"
     git checkout -b main
@@ -50,7 +52,7 @@ function Process-Subdirectory {
     git add .
     git commit -m "Initial commit"
     git push origin main
-    Write-Output "Pushed code to GitHub repository: https://github.com/terraform-navercloudplatform-modules/$repoName"
+    Write-Output "Pushed code to GitHub repository: https://github.com/terraform-$terraformProvider-modules/$repoName"
 
     Write-Debug "Create a new release in the GitHub repository"
     gh release create v1.0.0 --generate-notes
@@ -67,29 +69,8 @@ function Process-TwoLevelDirectories {
 
     # Get immediate subdirectories
     Get-ChildItem -Path $directory -Directory | ForEach-Object {
-        $firstLevelSubDir = $_.FullName
-        $hasSubSubDirs = (Get-ChildItem -Path $firstLevelSubDir -Directory | Measure-Object).Count -gt 0
-        if ($hasSubSubDirs) {
-            # Process subdirectories within the immediate subdirectories
-            Get-ChildItem -Path $firstLevelSubDir -Directory | ForEach-Object {
-                $secondLevelSubDir = $_.FullName
-                try {
-                    Process-Subdirectory -subDir $secondLevelSubDir
-                }
-                catch {
-                    Write-Error "Stopping further processing due to error in directory: $secondLevelSubDir"
-                    break
-                }
-            }
-        } else {
-            try {
-                Process-Subdirectory -subDir $firstLevelSubDir
-            }
-            catch {
-                Write-Error "Stopping further processing due to error in directory: $firstLevelSubDir"
-                break
-            }
-        }
+        $firstLevelSubDir = $_.FullName     
+        Process-Subdirectory -subDir $firstLevelSubDir
     }
 }
 

@@ -4,7 +4,7 @@ variable "region" {
   default     = null
   validation {
     condition     = can(regex("^(KR1|KR2|JP1)$", var.region))
-    error_message = "The region must be one of 'KR1', 'KR2', 'JP1'." 
+    error_message = "The region must be one of 'KR1', 'KR2', 'JP1'."
   }
 }
 
@@ -57,9 +57,9 @@ variable "nhn_encryption" {
 - skm_appkey: (Required) The appKeys for Secure Key Manager products.
 - skm_key_id: (Required) The key ID in Secure Key Manager.
 EOF
-  type        = object({
+  type = object({
     skm_appkey = string
     skm_key_id = string
   })
-  default     = null
+  default = null
 }

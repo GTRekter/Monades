@@ -1,11 +1,11 @@
 resource "nhncloud_compute_instance_v2" "compute_instance_v2" {
-  name      = var.name
-  region    = var.region
-  flavor_name = var.flavor_name
-  flavor_id = var.flavor_id
-  image_name = var.image_name
-  image_id =  var.image_id
-  key_pair  = var.key_pair
+  name            = var.name
+  region          = var.region
+  flavor_name     = var.flavor_name
+  flavor_id       = var.flavor_id
+  image_name      = var.image_name
+  image_id        = var.image_id
+  key_pair        = var.key_pair
   security_groups = var.security_groups
 
   dynamic "network" {

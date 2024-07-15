@@ -4,7 +4,7 @@ variable "region" {
   default     = null
   validation {
     condition     = can(regex("^(KR1|KR2|JP1)$", var.region))
-    error_message = "The region must be one of 'KR1', 'KR2', 'JP1'." 
+    error_message = "The region must be one of 'KR1', 'KR2', 'JP1'."
   }
 }
 
@@ -66,6 +66,10 @@ EOF
     port = optional(string)
   }))
   default = null
+  validation {
+    condition     = alltrue([for network in var.network : length(compact([network.name, network.uuid, network.port])) == 1])
+    error_message = "One among network.name, network.uuid, and network.port must be specified."
+  }
 }
 
 variable "security_groups" {
@@ -78,10 +82,6 @@ variable "user_data" {
   description = "(Optional) The script to be executed after instance booting and its configuration. Base64-encoded string, which allows up to 65535 bytes."
   type        = string
   default     = null
-  validation {
-    condition     = length(var.user_data) == 0 || can(regex("^[A-Za-z0-9+/=]*$", var.user_data))
-    error_message = "The user_data must be a valid Base64-encoded string."
-  }
 }
 
 variable "block_device" {
@@ -94,29 +94,29 @@ variable "block_device" {
 - volume_size: (Optional) The block storage size for the instance to create. Available from 20 GB to 2,000 GB (required if the flavor is U2).
 - delete_on_termination: (Optional) true: When deleting an instance, delete a block device. false: When deleting an instance, do not delete a block.
 EOF
-  type    = list(object({
-    uuid                  = string
+  type = list(object({
+    uuid                  = optional(string)
     source_type           = string
     destination_type      = string
     boot_index            = number
     volume_size           = number
     delete_on_termination = bool
-    nhn_encryption        = object({
+    nhn_encryption = optional(object({
       skm_appkey = string
       skm_key_id = string
-    })
+    }))
   }))
+  default = []
   validation {
-    condition     = var.block_device.source_type == null || contains(["blank", "image", "volume", "snapshot"], var.block_device.source_type)
-    error_message = "The source type must be one of 'image', 'volume', 'snapshot'."
+    condition     = alltrue([for block_device in var.block_device : block_device.source_type == "" || contains(["blank", "image", "volume", "snapshot"], block_device.source_type)])
+    error_message = "The source type must be one of 'blank', 'image', 'volume', 'snapshot'."
   }
   validation {
-    condition     = var.block_device.destination_type == null || contains(["local", "volume"], var.block_device.destination_type)
+    condition     = alltrue([for block_device in var.block_device : block_device.destination_type == "" || contains(["local", "volume"], block_device.destination_type)])
     error_message = "The destination type must be one of 'local', 'volume'."
   }
   validation {
-    condition     = var.block_device.volume_size == null || (var.block_device.volume_size >= 20 && var.block_device.volume_size <= 2000)
+    condition     = alltrue([for block_device in var.block_device : block_device.volume_size == 0 || (block_device.volume_size >= 20 && block_device.volume_size <= 2000)])
     error_message = "The block storage size must be between 20 GB and 2,000 GB."
   }
-  default = null
 }

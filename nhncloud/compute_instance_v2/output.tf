@@ -59,4 +59,21 @@ output "instance_security_groups" {
 }
 
 output "instance_access_ip_v4" {
-  description = "The
+  description = "The first detected Fixed IPv4 address."
+  value       = nhncloud_compute_instance_v2.compute_instance_v2.access_ip_v4
+}
+
+output "instance_access_ip_v6" {
+  description = "The first detected Fixed IPv6 address."
+  value       = nhncloud_compute_instance_v2.compute_instance_v2.access_ip_v6
+}
+
+output "instance_created" {
+  description = "The time when the instance was created."
+  value       = nhncloud_compute_instance_v2.compute_instance_v2.created
+}
+
+output "instance_updated" {
+  description = "The time when the instance was last updated."
+  value       = nhncloud_compute_instance_v2.compute_instance_v2.updated
+}
