@@ -51,7 +51,7 @@ EOF
       issuer                        = optional(string)
       lifetime_in_seconds           = optional(number)
       logout = optional(object({
-        callback = optional(string)
+        callback    = optional(string)
         slo_enabled = optional(bool)
       }))
       map_identities                     = optional(bool)

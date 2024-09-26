@@ -8,6 +8,10 @@ variable "hypervisor_code" {
   description = "(Optional) Hypervisor code. XEN(Default), RHV"
   type        = string
   default     = "RHV"
+  validation {
+    condition     = can(regex("XEN|RHV", var.hypervisor_code))
+    error_message = "hypervisor_code must be XEN or RHV."
+  }
 }
 
 variable "cluster_type" {
